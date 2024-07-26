@@ -3,7 +3,6 @@ import './App.css'
 
 import TodoItem from './components/TodoItem'
 import { useState } from 'react'
-import { useEffect } from 'react'
 
 function App() {
   const [task,setTask] = useState('')
@@ -19,8 +18,8 @@ function App() {
       let tasks = JSON.parse(localStorage.getItem("tasks"))
       console.log("Tasks in local storage",tasks)
       if(!tasks){
-        tasks = [{id:id,description:task}]
-      }else{tasks.push({id:id,description:task})}
+        tasks = [{id:id,description:task,done:false}]
+      }else{tasks.push({id:id,description:task,done:false})}
 
       localStorage.setItem("tasks",JSON.stringify(tasks))
       setTodoList(prevList=>{
@@ -45,7 +44,7 @@ function App() {
       </form>
       <ul className='py-2 px-5'>
       {todoList.map((el)=>{
-        return <TodoItem key={el.id} id={el.id} description={el.description}/>
+        return <TodoItem key={el.id} id={el.id} description={el.description} done={el.done}/>
       })}
       </ul>
       
