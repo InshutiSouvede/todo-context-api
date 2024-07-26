@@ -14,12 +14,15 @@ function App() {
 
   function addTodoItem(){
     if(task){
+      const id = nanoid()
+      localStorage.setItem(id,JSON.stringify({id,task}))
+      
       setTodoList(prevList=>{
-        return [...prevList,{id:nanoid(),description:task}]})
+        return [...prevList,{id:id,description:task}]})
     }
     setTask('')
   }
-
+  
   return (
     <div className='p-10 m-auto max-w-screen-lg'>
       <h1 className=' text-[100px] text-center text-gray-300'>todos</h1>
