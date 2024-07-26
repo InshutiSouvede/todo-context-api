@@ -3,10 +3,11 @@ import './App.css'
 
 import TodoItem from './components/TodoItem'
 import { useState } from 'react'
+import { useEffect } from 'react'
 
 function App() {
   const [task,setTask] = useState('')
-  const [todoList,setTodoList] = useState([])
+  const [todoList,setTodoList] = useState(JSON.parse(localStorage.getItem("tasks"))||[])
   function handleChange(event){
     console.log("I am changing the value of task");
     setTask(event.target.value)
@@ -15,14 +16,18 @@ function App() {
   function addTodoItem(){
     if(task){
       const id = nanoid()
-      localStorage.setItem(id,JSON.stringify({id,task}))
-      
+      let tasks = JSON.parse(localStorage.getItem("tasks"))
+      console.log("Tasks in local storage",tasks)
+      if(!tasks){
+        tasks = [{id:id,description:task}]
+      }else{tasks.push({id:id,description:task})}
+
+      localStorage.setItem("tasks",JSON.stringify(tasks))
       setTodoList(prevList=>{
         return [...prevList,{id:id,description:task}]})
     }
     setTask('')
   }
-  
   return (
     <div className='p-10 m-auto max-w-screen-lg'>
       <h1 className=' text-[100px] text-center text-gray-300'>todos</h1>
