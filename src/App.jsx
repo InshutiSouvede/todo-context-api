@@ -4,11 +4,18 @@ import TodoItem from './components/TodoItem'
 
 function App() {
 
+
   return (
-    <>
-      <h1 className='text-[100px] text-center text-gray-300'>todos</h1>
+    <div className='p-10 m-auto max-w-screen-lg'>
+      <h1 className=' text-[100px] text-center text-gray-300'>todos</h1>
+      <form action="#" className='relative '>
+        <input type="text" className='shadow-gray-400 shadow-md py-2 px-5 w-full text-gray-500 text-xl rounded-3xl' />
+      </form>
+      <ul className='py-2 px-5'>
       <TodoItem name="" id={nanoid()} description="I am Here"/>
-    </>
+      </ul>
+      
+    </div>
   )
 }
 
