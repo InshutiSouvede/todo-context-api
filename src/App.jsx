@@ -6,11 +6,19 @@ import { useState } from 'react'
 
 function App() {
   const [task,setTask] = useState('')
+  const [todoList,setTodoList] = useState([])
   function handleChange(event){
     console.log("I am changing the value of task");
     setTask(event.target.value)
   }
 
+  function addTodoItem(){
+    if(task){
+      setTodoList(prevList=>{
+        return [...prevList,{id:nanoid(),description:task}]})
+    }
+    setTask('')
+  }
 
   return (
     <div className='p-10 m-auto max-w-screen-lg'>
@@ -23,12 +31,14 @@ function App() {
          onChange={handleChange}
         />
        
-        <button className='absolute top-2 right-5'><img src="./circlePlus.svg" alt="add" /></button>
+        <button type='button' onClick={addTodoItem} className='absolute top-2 right-5'><img src="./circlePlus.svg" alt="add" /></button>
          
         
       </form>
       <ul className='py-2 px-5'>
-      <TodoItem name="" id={nanoid()} description="I am Here"/>
+      {todoList.map((el)=>{
+        return <TodoItem key={el.id} id={el.id} description={el.description}/>
+      })}
       </ul>
       
     </div>
