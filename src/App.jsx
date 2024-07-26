@@ -42,7 +42,7 @@ function App() {
          
         
       </form>
-      <ul className='py-2 px-5'>
+      <ul className='py-2 px-5 flex flex-col gap-8'>
       {todoList.map((el)=>{
         return <TodoItem key={el.id} id={el.id} description={el.description} done={el.done}/>
       })}
