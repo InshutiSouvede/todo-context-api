@@ -9,8 +9,8 @@ export default function TodoItem(props){
             <input type="checkbox" className="" id={props.id} name={props.name?props.name:"todoItem"} value={props.description} />
             <label onClick={()=>setDone(prev=>!prev)} htmlFor={props.id}>{props.description}</label>
             </div>
-            <div className="bg-gray-200 w-max py-3 px-4 rounded-3xl">
-            <img className="cursor-pointer" onClick={props.handleDeletion} src="./trash.svg" alt="trash" />
+            <div className="bg-gray-200  w-10 h-10 rounded-3xl">
+            <img className="cursor-pointer m-auto mt-2" onClick={props.handleDeletion} src="./trash.svg" alt="trash" />
             </div>
             
         </div>
