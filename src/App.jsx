@@ -16,6 +16,10 @@ function App() {
     setTodoList(prevList=>{
       return prevList.filter((el)=>el.id!== id)
     })
+    const storedTasks = localStorage.getItem("tasks")
+    console.log("This are the items in store", JSON.parse(storedTasks))
+    const updatedTasks = JSON.parse(storedTasks).filter((el)=>el.id!== id)
+    localStorage.setItem("tasks",JSON.stringify(updatedTasks))
   }
   function addTodoItem(){
     if(task){
