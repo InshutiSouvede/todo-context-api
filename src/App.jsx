@@ -8,24 +8,39 @@ function App() {
   const [task,setTask] = useState('')
   const [todoList,setTodoList] = useState(JSON.parse(localStorage.getItem("tasks"))||[])
   function handleChange(event){
-    console.log("I am changing the value of task");
     setTask(event.target.value)
   }
-  function removeItem(event,id){
-    console.log("You are about to an item with id ",id)
+  function removeItem(id){
     setTodoList(prevList=>{
       return prevList.filter((el)=>el.id!== id)
     })
     const storedTasks = localStorage.getItem("tasks")
-    console.log("This are the items in store", JSON.parse(storedTasks))
     const updatedTasks = JSON.parse(storedTasks).filter((el)=>el.id!== id)
     localStorage.setItem("tasks",JSON.stringify(updatedTasks))
   }
+  function cancelOutTask(event,id){
+    console.log("toggle task done for ",id)
+    setTodoList(prevList=>{
+      return prevList.map((el)=>{
+        if(el.id===id){
+          el.done = !el.done
+        }
+        return el
+      })
+    })
+    const storedTasks = localStorage.getItem("tasks")
+    const updatedTasks = JSON.parse(storedTasks).map((el)=>{
+      if(el.id===id){
+        el.done = !el.done
+      }
+      return el
+    })
+    localStorage.setItem("tasks",JSON.stringify(updatedTasks))
+}
   function addTodoItem(){
     if(task){
       const id = nanoid()
       let tasks = JSON.parse(localStorage.getItem("tasks"))
-      console.log("Tasks in local storage",tasks)
       if(!tasks){
         tasks = [{id:id,description:task,done:false}]
       }else{tasks.push({id:id,description:task,done:false})}
@@ -50,7 +65,7 @@ function App() {
       </form>
       <ul className='py-2 px-5 flex flex-col gap-8'>
       {todoList.map((el)=>{
-        return <TodoItem key={el.id} id={el.id} handleDeletion={(event)=>removeItem(event,el.id)} description={el.description} done={el.done}/>
+        return <TodoItem key={el.id} id={el.id} handleCancellation = {(event)=>cancelOutTask(event,el.id)} handleDeletion={()=>removeItem(el.id)} description={el.description} done={el.done}/>
       })}
       </ul>
       
