@@ -19,11 +19,11 @@ function App() {
     localStorage.setItem("tasks",JSON.stringify(updatedTasks))
   }
   function cancelOutTask(event,id){
-    console.log("toggle task done for ",id)
+    
     setTodoList(prevList=>{
       return prevList.map((el)=>{
         if(el.id===id){
-          el.done = !el.done
+          el.done = event.target.checked
         }
         return el
       })
@@ -47,7 +47,7 @@ function App() {
 
       localStorage.setItem("tasks",JSON.stringify(tasks))
       setTodoList(prevList=>{
-        return [...prevList,{id:id,description:task}]})
+        return [...prevList,{id:id,description:task,done:false}]})
     }
     setTask('')
   }
