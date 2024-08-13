@@ -40,7 +40,7 @@ function Form() {
           type="submit"
           onClick={(event)=>{
             event.preventDefault()
-            dispatch(addItem({id:nanoid,description:task,done:false}))
+            dispatch(addItem({id:nanoid(),description:task,done:false}))
           }}
           className="absolute top-2 right-5"
         >

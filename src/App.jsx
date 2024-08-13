@@ -19,14 +19,6 @@ function App() {
     JSON.parse(localStorage.getItem("tasks")) || []
   );
 
-  function removeItem(id) {
-    setTodoList((prevList) => {
-      return prevList.filter((el) => el.id !== id);
-    });
-    const storedTasks = localStorage.getItem("tasks");
-    const updatedTasks = JSON.parse(storedTasks).filter((el) => el.id !== id);
-    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
-  }
   function cancelOutTask(event, id) {
     setTodoList((prevList) => {
       return prevList.map((el) => {

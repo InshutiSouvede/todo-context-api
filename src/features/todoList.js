@@ -11,8 +11,13 @@ const todoListSlice = createSlice({
             state.value = state.value.filter((el) => el.id !== action.payload.id);
         },
         cancelItem:(state,action)=>{
-            console.log(state.value, action.payload)
-            state.value.push(action.payload)
+            state.value = state.value.map((el) => {
+                if (el.id === action.payload.id) {
+                  el.done = !el.done
+                }
+                return el;
+              })
+            console.log("Finish the task", state.value)
         },
     }
 })
