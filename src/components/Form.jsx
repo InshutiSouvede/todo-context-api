@@ -4,28 +4,18 @@ import { addItem } from "../features/todoList";
 import { nanoid } from "nanoid";
 
 function Form() {
+  const dispatch = useDispatch();
   const [task, setTask] = useState("");
   function handleChange(event) {
     setTask(event.target.value);
   }
-  function addTodoItem() {
+  const addTask = (event) => {
+    event.preventDefault();
     if (task) {
-      const id = nanoid();
-      let tasks = JSON.parse(localStorage.getItem("tasks"));
-      if (!tasks) {
-        tasks = [{ id: id, description: task, done: false }];
-      } else {
-        tasks.push({ id: id, description: task, done: false });
-      }
-
-      localStorage.setItem("tasks", JSON.stringify(tasks));
-      setTodoList((prevList) => {
-        return [...prevList, { id: id, description: task, done: false }];
-      });
+      dispatch(addItem({ id: nanoid(), description: task, done: false }));
     }
-    setTask("");
-  }
-  const dispatch = useDispatch()
+  };
+
   return (
     <div>
       <form action="#" className="relative my-5">
@@ -38,10 +28,7 @@ function Form() {
         />
         <button
           type="submit"
-          onClick={(event)=>{
-            event.preventDefault()
-            dispatch(addItem({id:nanoid(),description:task,done:false}))
-          }}
+          onClick={addTask}
           className="absolute top-2 right-5"
         >
           <img src="./circlePlus.svg" alt="add" />
