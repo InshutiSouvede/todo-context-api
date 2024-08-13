@@ -7,7 +7,14 @@ const todoListSlice = createSlice({
             console.log(state.value, action.payload)
             state.value.push(action.payload)
         },
+        removeItem:(state,action)=>{
+            state.value = state.value.filter((el) => el.id !== action.payload.id);
+        },
+        cancelItem:(state,action)=>{
+            console.log(state.value, action.payload)
+            state.value.push(action.payload)
+        },
     }
 })
-export const {addItem} = todoListSlice.actions
+export const {addItem,removeItem,cancelItem} = todoListSlice.actions
 export default todoListSlice.reducer
