@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { todoListContext } from "./Home";
+import { todoListContext } from "../features/todoListContext";
 
 export default function TodoItem(props) {
   const { setTodoList } = useContext(todoListContext);

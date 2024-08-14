@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import TodoItem from "./TodoItem";
-import { todoListContext } from "./Home";
+import { todoListContext } from "../features/todoListContext";
 function TodoList() {
   const {todoList} = useContext(todoListContext)
   return (

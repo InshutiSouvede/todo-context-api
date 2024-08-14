@@ -1,8 +1,8 @@
-import React, { createContext, useState } from "react";
+import React, {useState } from "react";
 import Form from "./Form";
 import TodoList from "./TodoList";
+import { todoListContext } from "../features/todoListContext";
 
-export const todoListContext = createContext([])
 
 function Home() {
   const [todoList,setTodoList] = useState([])
