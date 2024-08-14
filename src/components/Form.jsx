@@ -10,7 +10,8 @@ function Form() {
     setTask(event.target.value);
   }
   
-  function addTodoItem(){
+  function addTodoItem(event){
+    event.preventDefault()
     if(task){
       const id = nanoid()
       setTodoList(prevList=>{
@@ -21,7 +22,7 @@ function Form() {
 
   return (
     <div>
-      <form action="#" className="relative my-5">
+      <form className="relative my-5">
         <input
           type="text"
           className="shadow-gray-400 shadow-md py-2 px-5 w-full text-gray-500 text-xl rounded-3xl"
@@ -31,7 +32,7 @@ function Form() {
         />
         <button
           type="submit"
-          onClick={addTodoItem}
+          onClick={(event)=>addTodoItem(event)}
           className="absolute top-2 right-5"
         >
           <img src="./circlePlus.svg" alt="add" />
