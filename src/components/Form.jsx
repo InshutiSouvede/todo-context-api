@@ -1,20 +1,23 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { addItem } from "../features/todoList";
+import React, { useContext, useState } from "react";
 import { nanoid } from "nanoid";
+import { todoListContext } from "./Home";
 
 function Form() {
-  const dispatch = useDispatch();
   const [task, setTask] = useState("");
+  const {setTodoList} = useContext(todoListContext)
+  
   function handleChange(event) {
     setTask(event.target.value);
   }
-  const addTask = (event) => {
-    event.preventDefault();
-    if (task) {
-      dispatch(addItem({ id: nanoid(), description: task, done: false }));
+  
+  function addTodoItem(){
+    if(task){
+      const id = nanoid()
+      setTodoList(prevList=>{
+        return [...prevList,{id:id,description:task,done:false}]})
     }
-  };
+    setTask('')
+  }
 
   return (
     <div>
@@ -28,7 +31,7 @@ function Form() {
         />
         <button
           type="submit"
-          onClick={addTask}
+          onClick={addTodoItem}
           className="absolute top-2 right-5"
         >
           <img src="./circlePlus.svg" alt="add" />

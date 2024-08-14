@@ -1,8 +1,8 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useContext } from "react";
 import TodoItem from "./TodoItem";
+import { todoListContext } from "./Home";
 function TodoList() {
-  const todoList = useSelector((state) => state.todoList.value);
+  const {todoList} = useContext(todoListContext)
   return (
     <div>
       <ul className="py-2 px-5 flex flex-col gap-8">
